@@ -140,7 +140,7 @@ async function proxyApiRequest(url, request) {
   }
 }
 
-async function onRequest({ request }) {
+export async function onRequest({ request }) {
   if (request.method === "OPTIONS") {
     return handleOptions();
   }
@@ -158,5 +158,3 @@ async function onRequest({ request }) {
 
   return proxyApiRequest(url, request);
 }
-
-module.exports = { onRequest };

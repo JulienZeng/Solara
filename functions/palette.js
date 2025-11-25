@@ -1,8 +1,5 @@
-const decodeJpegModule = require("./lib/vendor/jpeg-decoder.js");
-const decodeJpeg =
-  decodeJpegModule && decodeJpegModule.default
-    ? decodeJpegModule.default
-    : decodeJpegModule;
+import decodeJpegModule from "./lib/vendor/jpeg-decoder.js";
+const decodeJpeg = decodeJpegModule?.default ?? decodeJpegModule;
 
 const MAX_DIMENSION = 96;
 const TARGET_SAMPLE_COUNT = 2400;
@@ -350,7 +347,7 @@ async function buildPalette(arrayBuffer, contentType) {
   };
 }
 
-async function onRequest({ request }) {
+export async function onRequest({ request }) {
   if (request.method === "OPTIONS") {
     return handleOptions();
   }
@@ -454,5 +451,3 @@ async function onRequest({ request }) {
     });
   }
 }
-
-module.exports = { onRequest };

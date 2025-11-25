@@ -1,4 +1,4 @@
-const { URL } = require("url");
+import { URL } from "url";
 
 const PUBLIC_PATH_PATTERNS = [/^\/login(?:\/|$)/, /^\/api\/login(?:\/|$)/];
 const PUBLIC_FILE_EXTENSIONS = new Set([
@@ -33,10 +33,10 @@ function isPublicPath(pathname) {
 }
 
 /**
- * Express middleware factory
+ * ESM export — Express middleware factory
  * options.password: 明文密码（优先），否则从 process.env.PASSWORD 读取
  */
-function localAuthMiddleware(options = {}) {
+export default function localAuthMiddleware(options = {}) {
   const password =
     typeof options.password === "string"
       ? options.password
@@ -73,5 +73,3 @@ function localAuthMiddleware(options = {}) {
     return res.redirect(302, "/login");
   };
 }
-
-module.exports = localAuthMiddleware;
